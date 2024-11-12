@@ -144,27 +144,27 @@ export function fileType(path: string): FileType | undefined {
 export function fileProps(path: string): string[] {
     switch (fileType(path)) {
         case 'tv': {
-            return ['title', 'quality', 'format', 'year', 'season', 'episode']
+            return ['type', 'title', 'quality', 'format', 'year', 'season', 'episode']
         }
 
         case'movie': {
-            return ['title', 'quality', 'format', 'year']
+            return ['type', 'title', 'quality', 'format', 'year']
         }
 
         case'music': {
-            return ['title', 'quality', 'format', 'year']
+            return ['type', 'title', 'quality', 'format', 'year']
         }
 
         case 'audiobook': {
-            return ['title', 'quality', 'format', 'year', 'season', 'episode']
+            return ['type', 'title', 'quality', 'format', 'year', 'season', 'episode']
         }
 
         case 'ebook': {
-            return ['title', 'format', 'year', 'episode']
+            return ['type', 'title', 'format', 'year', 'episode']
         }
 
         default: {
-            return ['title']
+            return ['type', 'title']
         }
     }
 }

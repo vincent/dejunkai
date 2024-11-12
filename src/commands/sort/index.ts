@@ -1,17 +1,17 @@
 import {Args, Command, Flags} from '@oclif/core'
-import path from 'node:path'
 import { glob } from 'glob'
+import path from 'node:path'
 
 import { fileProps } from '../../internal/file-patterns.js'
 import { LLM } from '../../internal/llama.js'
-import UpdateModel from '../models/index.js'
 import { resolvePath } from '../../internal/utils.js'
+import UpdateModel from '../models/index.js'
 
 export default class Sort extends Command {
   static args = {
     input: Args.directory({
-        required: true,
         description: 'Where to find files to sort',
+        required: true,
     }),
   }
 
@@ -71,7 +71,7 @@ export default class Sort extends Command {
     this.log(`found ${files.length} files`);
 
     for (const file of files) {
-        const basename = file.replace(input, '').split(path.delimiter).slice(-2).join('/').replace(/(^\/|\/$)/g, '');
+        const basename = file.replace(input, '').split(path.delimiter).slice(-2).join('/').replaceAll(/(^\/|\/$)/g, '');
         // eslint-disable-next-line no-await-in-loop
         await llm.guessFileMetadata(basename, fileProps(basename)).catch((error) => this.log(error.message));
     }
